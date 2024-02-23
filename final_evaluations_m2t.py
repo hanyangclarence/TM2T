@@ -236,12 +236,18 @@ def animation_4_user_study(save_dir):
 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--path", default='./default_gen_path')
+    args = parser.parse_args()
+    gen_result_path = args.path
+
     dataset_opt_path = './checkpoints/t2m/Comp_v6_KLD005/opt.txt'
     eval_text_loaders = {
         # For HumanML3D dataset
         'M2T_EL4_DL4_NH8_PS': lambda: get_text_loader(
             './checkpoints/t2m/M2T_EL4_DL4_NH8_PS/opt.txt',
-            batch_size, gt_dataset, device
+            batch_size, gt_dataset, device, gen_result_path=gen_result_path
         ),
 
         # For KIT-ML dataset

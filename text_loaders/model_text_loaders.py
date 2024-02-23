@@ -9,7 +9,7 @@ def collate_fn(batch):
     batch.sort(key=lambda x: x[3], reverse=True)
     return default_collate(batch)
 
-def get_text_loader(opt_path, batch_size, ground_truth_dataset, device):
+def get_text_loader(opt_path, batch_size, ground_truth_dataset, device, gen_result_path):
     opt = get_opt(opt_path, device)
     # print(opt.use_att)
 
@@ -21,7 +21,7 @@ def get_text_loader(opt_path, batch_size, ground_truth_dataset, device):
     print('Generating %s ...' % opt.name)
 
     if 'M2T' in opt.name:
-        dataset = M2TNMTGeneratedDataset(opt, ground_truth_dataset, w_vectorizer)
+        dataset = M2TNMTGeneratedDataset(opt, ground_truth_dataset, w_vectorizer, gen_result_path=gen_result_path)
     else:
         raise KeyError('Dataset not recognized!!')
 

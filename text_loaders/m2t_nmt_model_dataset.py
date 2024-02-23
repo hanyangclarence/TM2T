@@ -8,6 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from os.path import join as pjoin
 from tqdm import tqdm
 import spacy
+import json
 
 # from data.dataset import collate_fn
 
@@ -36,7 +37,7 @@ def build_models(opt):
 
 class M2TNMTGeneratedDataset(Dataset):
 
-    def __init__(self, opt, dataset, w_vectorizer):
+    def __init__(self, opt, dataset, w_vectorizer, gen_result_path):
         print(opt.model_dir)
 
         if opt.dataset_name == 't2m':
@@ -62,8 +63,6 @@ class M2TNMTGeneratedDataset(Dataset):
         _, _, opt.txt_end_idx = w_vectorizer['eos/OTHER']
         opt.txt_pad_idx = len(w_vectorizer)
 
-        translator = build_models(opt)
-
         generated_texts_list = []
         motions_list = []
         all_captions_list = []
@@ -72,8 +71,20 @@ class M2TNMTGeneratedDataset(Dataset):
         t_tokens_list = []
         # print(mm_idxs)
 
+        if gen_result_path.endswith('.json'):
+            pred_caption = json.load(open(gen_result_path, 'r'))
+        elif gen_result_path.endswith('.txt'):
+            pred_caption = {}
+            with open(gen_result_path, 'r') as f:
+                for line in f.readlines():
+                    motion_id = line.split('\t')[0]
+                    caption = line.split('\t')[1]
+                    caption = '.'.join(caption.split('.')[1:])
+                    caption = caption.strip().capitalize()
+                    pred_caption[motion_id] = caption
+
         for i, data in tqdm(enumerate(dataloader)):
-            _, _, _, _, motion, m_tokens, m_length, all_captions = data
+            _, _, _, _, motion, m_tokens, m_length, all_captions, name = data
             m_tokens = m_tokens.detach().to(opt.device).long()
             # print(m_tokens)
             # print(m_tokens.shape)
@@ -90,7 +101,7 @@ class M2TNMTGeneratedDataset(Dataset):
 
             all_captions = [sentence[0] for sentence in all_captions]
 
-            pred_sent = all_captions[-1]
+            pred_sent = pred_caption[name]
             print(f'{i}, {pred_sent}')
 
             # if len(all_captions) < 3:
