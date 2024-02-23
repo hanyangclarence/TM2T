@@ -96,11 +96,14 @@ class M2TNMTGeneratedDataset(Dataset):
             #
             # pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
 
-            # test ground truth result
-            pred_sent = all_captions[-1][0]
-
 
             all_captions = [sentence[0] for sentence in all_captions]
+
+
+            # Test gt!!
+            pred_sent = all_captions[-1]
+            all_captions = all_captions[:-1] if len(all_captions) > 1 else all_captions
+
 
             # motion_name = name[0]
             # motion_name = motion_name.split('_')[0]
