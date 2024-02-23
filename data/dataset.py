@@ -530,6 +530,7 @@ class Motion2TextEvalDataset(data.Dataset):
         for name in tqdm(id_list):
                 if not os.path.exists(pjoin(opt.motion_dir, name + '.npy')):
                     print(f"Does not exist! {pjoin(opt.motion_dir, name + '.npy')}")
+                    continue
             # try:
                 motion = np.load(pjoin(opt.motion_dir, name + '.npy'))
                 if (len(motion)) < min_motion_len or (len(motion) >= 200):
