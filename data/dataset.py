@@ -533,14 +533,7 @@ class Motion2TextEvalDataset(data.Dataset):
                 if (len(motion)) < min_motion_len or (len(motion) >= 200):
                     continue
 
-                m_token_list = []
-
-                with cs.open(pjoin(opt.m_token_dir, name + '.txt'), 'r') as f:
-                    for line in f.readlines():
-                        m_token_list.append(line.strip().split(' '))
-                        # if line.__contains__("419416"):
-                        #     print(name)
-                        #     print(line)
+                m_token_list = [-999]
 
                 text_data = []
                 flag = False
