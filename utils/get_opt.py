@@ -83,4 +83,6 @@ def get_opt(opt_path, device):
     opt.is_continue = False
     opt.device = device
 
+    print(opt)
+
     return opt
