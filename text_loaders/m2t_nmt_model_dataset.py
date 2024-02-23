@@ -101,8 +101,9 @@ class M2TNMTGeneratedDataset(Dataset):
 
             all_captions = [sentence[0] for sentence in all_captions]
 
-            print(f'!!!, {name}, {type(name)}')
-            pred_sent = pred_caption[name[0]]
+            motion_name = name[0]
+            motion_name = motion_name.split('_')[0]
+            pred_sent = pred_caption[motion_name]
             print(f'{i}, {pred_sent}')
 
             # if len(all_captions) < 3:
