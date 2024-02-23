@@ -77,14 +77,22 @@ class M2TNMTGeneratedDataset(Dataset):
             m_tokens = m_tokens.detach().to(opt.device).long()
             # print(m_tokens)
             # print(m_tokens.shape)
-            pred_word_ids = translator.translate_sentence(m_tokens)
-            pred_word_ids = pred_word_ids[1:-1]
 
-            if i % 10 == 0:
-                print(f'M2TNMTGeneratedDataset: {m_tokens}, {pred_word_ids}')
 
-            pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
+
+            # pred_word_ids = translator.translate_sentence(m_tokens)
+            # pred_word_ids = pred_word_ids[1:-1]
+            #
+            # pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
+
+
+
+
             all_captions = [sentence[0] for sentence in all_captions]
+
+            pred_sent = all_captions[-1]
+            print(f'{i}, {pred_sent}')
+
             # if len(all_captions) < 3:
             #     all_captions = all_captions * 3
             # print(pred_sent)
