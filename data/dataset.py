@@ -536,7 +536,7 @@ class Motion2TextEvalDataset(data.Dataset):
                 if (len(motion)) < min_motion_len or (len(motion) >= 200):
                     continue
 
-                m_token_list = [-999]
+                m_token_list = [[-999]]
 
                 text_data = []
                 flag = False
