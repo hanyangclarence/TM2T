@@ -91,7 +91,7 @@ def evaluate_bleu_rouge_cider(text_loaders, file):
 
         ref_list = [list(refs) for refs in zip(*text_loader.dataset.all_caption_list)]
         cand_list = text_loader.dataset.generated_texts_list
-        print(f'\n\n{ref_list}\n{cand_list}\n', file=sys.stderr)
+        print(f'\n\n{len(ref_list)}\n{len(cand_list)}\n', file=sys.stderr)
         scores = nlg_eval.compute_metrics(ref_list, cand_list)
         bleu_score_dict[text_loader_name] = np.array([scores['Bleu_1'],scores['Bleu_2'],scores['Bleu_3'],scores['Bleu_4']])
         rouge_score_dict[text_loader_name] = scores['ROUGE_L']
