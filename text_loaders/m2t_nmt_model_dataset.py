@@ -96,7 +96,7 @@ class M2TNMTGeneratedDataset(Dataset):
             #
             # pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
 
-            print(all_captions)
+            # test ground truth result
             pred_sent = all_captions[-1][0]
 
 
