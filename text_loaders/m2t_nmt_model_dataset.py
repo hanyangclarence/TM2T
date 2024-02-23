@@ -80,6 +80,9 @@ class M2TNMTGeneratedDataset(Dataset):
             pred_word_ids = translator.translate_sentence(m_tokens)
             pred_word_ids = pred_word_ids[1:-1]
 
+            if i % 10 == 0:
+                print(f'M2TNMTGeneratedDataset: {m_tokens}, {pred_word_ids}')
+
             pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
             all_captions = [sentence[0] for sentence in all_captions]
             # if len(all_captions) < 3:
