@@ -6,4 +6,4 @@ SPICELIB=pycocoevalcap/spice/lib
 JAR=stanford-corenlp-3.6.0
 
 DIR="$( cd "$(dirname "$0")" ; pwd -P )"
-cd DIR
+cd $DIR
