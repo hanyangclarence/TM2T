@@ -598,6 +598,7 @@ class Motion2TextEvalDataset(data.Dataset):
 
     def __getitem__(self, item):
         name = self.name_list[item]
+        print(name, type(name))
         data = self.data_dict[self.name_list[item]]
         motion, m_token_list, text_list = data['motion'], data['m_token_list'], data['text']
 
