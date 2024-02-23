@@ -56,9 +56,9 @@ def get_opt(opt_path, device):
     opt.meta_dir = pjoin(opt.save_root, 'meta')
 
     if opt.dataset_name == 't2m':
-        opt.data_root = './dataset/HumanML3D/'
-        opt.motion_dir = pjoin(opt.data_root, 'new_joint_vecs')
-        opt.text_dir = pjoin(opt.data_root, 'texts')
+        opt.data_root = '/gpfs/u/home/LMCG/LMCGnngn/scratch/yanghan/My_Project/data/motion'
+        opt.motion_dir = pjoin(opt.data_root, 'test', 'joint_vecs')
+        opt.text_dir = pjoin(opt.data_root, 'humanml3d_text_description')
         opt.joints_num = 22
         opt.dim_pose = 263
         opt.max_motion_length = 196
