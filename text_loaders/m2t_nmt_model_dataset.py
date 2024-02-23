@@ -101,6 +101,7 @@ class M2TNMTGeneratedDataset(Dataset):
 
             all_captions = [sentence[0] for sentence in all_captions]
 
+            print(f'!!!, {name}, {type(name)}')
             pred_sent = pred_caption[name[0]]
             print(f'{i}, {pred_sent}')
 
