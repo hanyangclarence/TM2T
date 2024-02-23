@@ -96,14 +96,15 @@ class M2TNMTGeneratedDataset(Dataset):
             #
             # pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
 
-
+            print(all_captions)
+            pred_sent = all_captions[-1][0]
 
 
             all_captions = [sentence[0] for sentence in all_captions]
 
-            motion_name = name[0]
-            motion_name = motion_name.split('_')[0]
-            pred_sent = pred_caption[motion_name]
+            # motion_name = name[0]
+            # motion_name = motion_name.split('_')[0]
+            # pred_sent = pred_caption[motion_name]
             print(f'{i}, {pred_sent}')
 
             # if len(all_captions) < 3:
