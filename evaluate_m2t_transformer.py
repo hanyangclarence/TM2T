@@ -1,5 +1,5 @@
 import os
-
+import json
 from os.path import join as pjoin
 
 import utils.paramUtil as paramUtil
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     # vq_decoder.eval()
     # quantizer.eval()
 
-    opt.repeat_times = opt.repeat_times if opt.sample else 1
+    opt.repeat_times = 1
 
     if opt.sample:
         m2t_transformer.to(opt.device)
@@ -159,14 +159,8 @@ if __name__ == '__main__':
             # word_ids = word_ids.detach().to(opt.device).long()
             gt_tokens = m_tokens[:, 1:1+m_lens[0]//4]
 
-            name = 'L%03dC%03d' % (m_lens[0], i)
             data_name = data_name[0].split('_')[0]
-            item_dict = {
-                'caption': captions[0],
-                'length': m_lens[0],
-                'gt_motion': motions[:, :m_lens[0]].cpu().numpy()
-            }
-            print(f'{data_name}: Ground Truth Tokens')
+            print(f'{i}/{data_name}: Ground Truth Tokens')
             # print(word_ids[0])
             print(captions[0])
             for t in range(opt.repeat_times):
@@ -179,23 +173,21 @@ if __name__ == '__main__':
                     pred_tokens = pred_tokens[1:-1]
 
                 # print(pred_tokens)
-                print(f'{data_name}: Sampled Tokens %02d'%t)
+                print(f'{i}/{data_name}: Sampled Tokens %02d'%t)
                 # print(pred_tokens)
                 # vq_latent = quantizer.get_codebook_entry(pred_tokens)
                 # gen_motion = vq_decoder(vq_latent)
                 pred_caption = ' '.join(w_vectorizer.itos(i) for i in pred_tokens)
                 print(pred_caption)
-                sub_dict = {}
                 # sub_dict['pred_caption'] = pred_caption
                 # sub_dict['length'] = len(gen_motion[0])
-                item_dict['result_%02d'%t] = pred_caption
 
-            result_dict[name] = item_dict
+            result_dict[data_name] = pred_caption
             if i > opt.num_results:
                 break
 
-
-    print(result_dict)
+    with open('tm2t_test_mt2.json', 'r') as f:
+        json.dump(result_dict, f, indent=4)
 
     # print('Animating Results')
     # '''Animating Results'''
