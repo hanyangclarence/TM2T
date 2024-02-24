@@ -186,7 +186,7 @@ if __name__ == '__main__':
             if i > opt.num_results:
                 break
 
-    with open('tm2t_test_mt2.json', 'r') as f:
+    with open('tm2t_test_mt2.json', 'w') as f:
         json.dump(result_dict, f, indent=4)
 
     # print('Animating Results')
