@@ -86,6 +86,7 @@ class M2TNMTGeneratedDataset(Dataset):
             #     all_captions = all_captions * 3
             # print(pred_sent)
             # print(all_captions)
+            print(f'{all_captions[0]}\n{pred_sent}')
 
             word_list, pos_list = self._process_text(pred_sent.strip())
             t_tokens = ['%s/%s' % (word_list[i], pos_list[i]) for i in range(len(word_list))]
