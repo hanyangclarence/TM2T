@@ -160,8 +160,7 @@ if __name__ == '__main__':
             gt_tokens = m_tokens[:, 1:1+m_lens[0]//4]
 
             name = 'L%03dC%03d' % (m_lens[0], i)
-            print(data_name)
-            data_name = data_name.split('_')[0]
+            data_name = data_name[0].split('_')[0]
             item_dict = {
                 'caption': captions[0],
                 'length': m_lens[0],
