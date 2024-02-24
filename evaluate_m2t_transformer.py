@@ -153,19 +153,20 @@ if __name__ == '__main__':
     with torch.no_grad():
         for i, batch_data in enumerate(data_loader):
             print('%02d_%03d'%(i, opt.num_results))
-            _, _, captions, sent_lens, motions, m_tokens, m_lens, _ = batch_data[:8]
+            _, _, captions, sent_lens, motions, m_tokens, m_lens, _, data_name = batch_data
             # word_emb = word_emb.detach().to(opt.device).float()
             m_tokens = m_tokens.detach().to(opt.device).long()
             # word_ids = word_ids.detach().to(opt.device).long()
             gt_tokens = m_tokens[:, 1:1+m_lens[0]//4]
 
             name = 'L%03dC%03d' % (m_lens[0], i)
+            data_name = data_name.split('_')[0]
             item_dict = {
                 'caption': captions[0],
                 'length': m_lens[0],
                 'gt_motion': motions[:, :m_lens[0]].cpu().numpy()
             }
-            print('Ground Truth Tokens')
+            print(f'{data_name}: Ground Truth Tokens')
             # print(word_ids[0])
             print(captions[0])
             for t in range(opt.repeat_times):
@@ -178,7 +179,7 @@ if __name__ == '__main__':
                     pred_tokens = pred_tokens[1:-1]
 
                 # print(pred_tokens)
-                print('Sampled Tokens %02d'%t)
+                print(f'{data_name}: Sampled Tokens %02d'%t)
                 # print(pred_tokens)
                 # vq_latent = quantizer.get_codebook_entry(pred_tokens)
                 # gen_motion = vq_decoder(vq_latent)
