@@ -101,16 +101,17 @@ class M2TNMTGeneratedDataset(Dataset):
 
 
             # Test gt!!
-            print('Remove me!', end=' ')
-            pred_sent = all_captions[-1]
-            all_captions = all_captions[:-1] if len(all_captions) > 1 else all_captions
+            # print('Remove me!', end=' ')
+            # pred_sent = all_captions[-1]
+            # all_captions = all_captions[:-1] if len(all_captions) > 1 else all_captions
 
 
-            # motion_name = name[0]
-            # motion_name = motion_name.split('_')[0]
-            # pred_sent = pred_caption[motion_name]
+            motion_name = name[0]
+            motion_name = motion_name.split('_')[0]
+            pred_sent = pred_caption[motion_name]
 
             print(f'{i}, {pred_sent}')
+            print(f'{i}, {all_captions[0]}')
 
             # if len(all_captions) < 3:
             #     all_captions = all_captions * 3
