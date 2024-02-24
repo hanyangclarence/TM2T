@@ -81,10 +81,10 @@ if __name__ == '__main__':
     os.makedirs(opt.animation_dir, exist_ok=True)
 
     if opt.dataset_name == 't2m':
-        opt.data_root = './dataset/HumanML3D/'
-        opt.motion_dir = pjoin(opt.data_root, 'new_joint_vecs')
+        opt.data_root = '/gpfs/u/home/LMCG/LMCGnngn/scratch/yanghan/My_Project/data/motion'
+        opt.motion_dir = pjoin(opt.data_root, 'test/joint_vecs')
         opt.m_token_dir = pjoin(opt.data_root, 'VQVAEV3_CB1024_CMT_H1024_NRES3')
-        opt.text_dir = pjoin(opt.data_root, 'texts')
+        opt.text_dir = pjoin(opt.data_root, 'humanml3d_text_description')
         opt.joints_num = 22
         opt.max_motion_token = 55
         opt.max_motion_frame = 196
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     with torch.no_grad():
         for i, batch_data in enumerate(data_loader):
             print('%02d_%03d'%(i, opt.num_results))
-            _, _, captions, sent_lens, motions, m_tokens, m_lens, _ = batch_data
+            _, _, captions, sent_lens, motions, m_tokens, m_lens, _ = batch_data[:8]
             # word_emb = word_emb.detach().to(opt.device).float()
             m_tokens = m_tokens.detach().to(opt.device).long()
             # word_ids = word_ids.detach().to(opt.device).long()
@@ -194,23 +194,24 @@ if __name__ == '__main__':
                 break
 
 
+    print(result_dict)
 
-    print('Animating Results')
-    '''Animating Results'''
-    for i, (key, item) in enumerate(result_dict.items()):
-        print('%02d_%03d'%(i, opt.num_results))
-        captions = item['caption']
-        gt_motions = item['gt_motion']
-        joint_save_path = pjoin(opt.joint_dir, key)
-        animation_save_path = pjoin(opt.animation_dir, key)
-
-        os.makedirs(joint_save_path, exist_ok=True)
-        os.makedirs(animation_save_path, exist_ok=True)
-
-        # np.save(pjoin(joint_save_path, 'gt_motions.npy'), gt_motions)
-        plot_t2m(gt_motions, captions[0], pjoin(animation_save_path, 'gt_motion'))
-        for t in range(opt.repeat_times):
-            pred_caption = item['result_%02d'%t]
-            # motion = sub_dict['motion']
-            # np.save(pjoin(joint_save_path, 'gen_motion_%02d_L%03d.npy' % (t, motion.shape[1])), motion)
-            plot_t2m(gt_motions, pred_caption, pjoin(animation_save_path, 'gen_motion_%02d_L%03d' % (t, gt_motions.shape[1])))
+    # print('Animating Results')
+    # '''Animating Results'''
+    # for i, (key, item) in enumerate(result_dict.items()):
+    #     print('%02d_%03d'%(i, opt.num_results))
+    #     captions = item['caption']
+    #     gt_motions = item['gt_motion']
+    #     joint_save_path = pjoin(opt.joint_dir, key)
+    #     animation_save_path = pjoin(opt.animation_dir, key)
+    #
+    #     os.makedirs(joint_save_path, exist_ok=True)
+    #     os.makedirs(animation_save_path, exist_ok=True)
+    #
+    #     # np.save(pjoin(joint_save_path, 'gt_motions.npy'), gt_motions)
+    #     plot_t2m(gt_motions, captions[0], pjoin(animation_save_path, 'gt_motion'))
+    #     for t in range(opt.repeat_times):
+    #         pred_caption = item['result_%02d'%t]
+    #         # motion = sub_dict['motion']
+    #         # np.save(pjoin(joint_save_path, 'gen_motion_%02d_L%03d.npy' % (t, motion.shape[1])), motion)
+    #         plot_t2m(gt_motions, pred_caption, pjoin(animation_save_path, 'gen_motion_%02d_L%03d' % (t, gt_motions.shape[1])))

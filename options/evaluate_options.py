@@ -12,7 +12,7 @@ class TestT2MOptions(BaseOptions):
         self.parser.add_argument('--sample', action="store_true")
         self.parser.add_argument('--repeat_times', type=int, default=5)
         self.parser.add_argument('--beam_size', type=int, default=2)
-        self.parser.add_argument('--split_file', type=str, default='test.txt')
+        self.parser.add_argument('--split_file', type=str, default='humanml3d_test.txt')
 
         self.parser.add_argument('--text_file', type=str, default="./input.txt", help='Frequency of plot points')
 
