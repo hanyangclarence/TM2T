@@ -111,6 +111,8 @@ class M2TNMTGeneratedDataset(Dataset):
         self.opt = opt
         self.w_vectorizer = w_vectorizer
 
+        print(f'!!! Total: {len(self.generated_texts_list)}')
+
 
     def _process_text(self, sentence):
         sentence = sentence.replace('-', '')
