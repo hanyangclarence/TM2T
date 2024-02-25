@@ -57,8 +57,8 @@ if __name__ == '__main__':
     os.makedirs(opt.meta_dir, exist_ok=True)
 
     if opt.dataset_name == 't2m':
-        opt.data_root = './dataset/HumanML3D/'
-        opt.motion_dir = pjoin(opt.data_root, 'new_joint_vecs')
+        opt.data_root = '/gpfs/u/home/LMCG/LMCGnngn/scratch/yanghan/My_Project/data/motion'
+        opt.motion_dir = pjoin(opt.data_root, 'test/joint_vecs')
         # opt.text_dir = pjoin(opt.data_root, 'texts')
         opt.joints_num = 22
         opt.max_motion_length = 196
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     mean = np.load(pjoin(opt.meta_dir, 'mean.npy'))
     std = np.load(pjoin(opt.meta_dir, 'std.npy'))
 
-    all_split_file = pjoin(opt.data_root, 'all.txt')
+    all_split_file = pjoin(opt.data_root, 'humanml3d_test.txt')
 
     enc_channels = [1024, opt.dim_vq_latent]
     dec_channels = [opt.dim_vq_latent, 1024, dim_pose]
