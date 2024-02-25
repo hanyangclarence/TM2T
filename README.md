@@ -2,6 +2,36 @@
 ## [[Project Page]](https://ericguo5513.github.io/TM2T) [[Paper]](https://arxiv.org/abs/2207.01696.pdf)
 
 ![teaser_image](https://github.com/EricGuo5513/TM2T/blob/main/docs/teaser_image.png)
+
+
+    ---> [M2T_EL4_DL4_NH8_PS] BLEU: (1): 0.6083 (2): 0.4407 (3): 0.3085 (4): 0.2176
+    ---> [M2T_EL4_DL4_NH8_PS] ROUGE_L: 0.4909
+    ---> [M2T_EL4_DL4_NH8_PS] CIDER: 0.7212
+    Time: 2024-02-24 20:26:05.436195
+    ========== Evaluating BERT Score ==========
+    preparing IDF dict...
+    done in 2.38 seconds
+    calculating scores...
+    computing bert embedding.
+    100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 150/150 [00:09<00:00, 15.12it/s]computing greedy matching.
+    100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 218/218 [00:02<00:00, 95.56it/s]done in 12.27 seconds, 1135.22 sentences/sec
+    ---> [M2T_EL4_DL4_NH8_PS] BERT SCORE: 0.3739
+    ==================== Replication 0 ====================
+    Time: 2024-02-24 20:26:25.281632
+    ========== Evaluating Matching Score ==========
+    ---> [M2T_EL4_DL4_NH8_PS] Matching Score: 2.9245
+    ---> [M2T_EL4_DL4_NH8_PS] R_precision: (top 1): 0.5224 (top 2): 0.7284 (top 3): 0.8218
+    ---> [ground truth] Matching Score: 2.9939
+    ---> [ground truth] R_precision: (top 1): 0.5065 (top 2): 0.6972 (top 3): 0.7966
+    !!! DONE !!!
+    ========== Matching Score Summary ==========
+    ---> [M2T_EL4_DL4_NH8_PS] Mean: 2.9245 CInterval: 0.0000
+    ---> [ground truth] Mean: 2.9939 CInterval: 0.0000
+    ========== R_precision Summary ==========
+    ---> [M2T_EL4_DL4_NH8_PS](top 1) Mean: 0.5224 CInt: 0.0000;(top 2) Mean: 0.7284 CInt: 0.0000;(top 3) Mean: 0.8218 CInt: 0.0000;
+    ---> [ground truth](top 1) Mean: 0.5065 CInt: 0.0000;(top 2) Mean: 0.6972 CInt: 0.0000;(top 3) Mean: 0.7966 CInt: 0.0000;
+
+
   
 ## Python Virtual Environment
 

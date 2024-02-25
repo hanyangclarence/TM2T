@@ -607,6 +607,7 @@ class Motion2TextEvalDataset(data.Dataset):
         return len(self.data_dict)
 
     def __getitem__(self, item):
+        motion_name = self.name_list[item]
         data = self.data_dict[self.name_list[item]]
         motion, m_token_list, text_list = data['motion'], data['m_token_list'], data['text']
 
@@ -667,7 +668,7 @@ class Motion2TextEvalDataset(data.Dataset):
             all_captions = all_captions * 3
 
 
-        return word_embeddings, pos_one_hots, caption, sent_len, motion, m_tokens, m_length, all_captions
+        return word_embeddings, pos_one_hots, caption, sent_len, motion, m_tokens, m_length, all_captions, motion_name
 
 
 class Motion2TextEvalSimpleDataset(data.Dataset):

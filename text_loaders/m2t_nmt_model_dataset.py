@@ -70,11 +70,12 @@ class M2TNMTGeneratedDataset(Dataset):
         m_tokens_list = []
         m_length_list = []
         t_tokens_list = []
+        name_list = []
         # print(mm_idxs)
 
         for i, data in tqdm(enumerate(dataloader)):
             try:
-                _, _, _, _, motion, m_tokens, m_length, all_captions = data
+                _, _, _, _, motion, m_tokens, m_length, all_captions, motion_name = data
                 m_tokens = m_tokens.detach().to(opt.device).long()
                 # print(m_tokens)
                 # print(m_tokens.shape)
@@ -101,6 +102,7 @@ class M2TNMTGeneratedDataset(Dataset):
             m_tokens_list.append(m_tokens[0].cpu().numpy())
             m_length_list.append(m_length[0].item())
             t_tokens_list.append(t_tokens)
+            print(f'!!! {name_list}, {type(name_list)}')
 
         self.generated_texts_list = generated_texts_list
         self.t_tokens_list = t_tokens_list
