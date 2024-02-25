@@ -73,11 +73,12 @@ class M2TNMTGeneratedDataset(Dataset):
         # print(mm_idxs)
 
         for i, data in tqdm(enumerate(dataloader)):
-            _, _, _, _, motion, m_tokens, m_length, all_captions = data
-            m_tokens = m_tokens.detach().to(opt.device).long()
-            # print(m_tokens)
-            # print(m_tokens.shape)
             try:
+                _, _, _, _, motion, m_tokens, m_length, all_captions = data
+                m_tokens = m_tokens.detach().to(opt.device).long()
+                # print(m_tokens)
+                # print(m_tokens.shape)
+
                 pred_word_ids = translator.translate_sentence(m_tokens)
             except:
                 continue
