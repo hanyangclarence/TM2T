@@ -18,7 +18,7 @@ def get_dataset_text_loader(opt_path, batch_size, device):
 
         w_vectorizer = WordVectorizerV2('./glove', 'our_vab')
         split_file = pjoin(opt.data_root, 'humanml3d_test.txt')
-        opt.m_token_dir = pjoin(opt.data_root, 'TM2T_tokens')
+        opt.m_token_dir = pjoin(opt.data_root, 'VQVAEV3_CB1024_CMT_H1024_NRES3')
         opt.n_mot_vocab = 1024 + 3
         opt.mot_start_idx = 1024
         opt.mot_end_idx = 1024 + 1
