@@ -77,7 +77,10 @@ class M2TNMTGeneratedDataset(Dataset):
             m_tokens = m_tokens.detach().to(opt.device).long()
             # print(m_tokens)
             # print(m_tokens.shape)
-            pred_word_ids = translator.translate_sentence(m_tokens)
+            try:
+                pred_word_ids = translator.translate_sentence(m_tokens)
+            except:
+                continue
             pred_word_ids = pred_word_ids[1:-1]
 
             pred_sent = ' '.join(w_vectorizer.itos(i) for i in pred_word_ids)
