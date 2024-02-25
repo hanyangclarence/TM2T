@@ -91,7 +91,8 @@ class M2TNMTGeneratedDataset(Dataset):
             #     all_captions = all_captions * 3
             # print(pred_sent)
             # print(all_captions)
-            print(f'gt: {all_captions[0]}\npred: {pred_sent}')
+            motion_name = motion_name[0].split('_')[0]
+            print(f'{motion_name}, gt: {all_captions[0]}\n{motion_name}, pred: {pred_sent}')
 
             word_list, pos_list = self._process_text(pred_sent.strip())
             t_tokens = ['%s/%s' % (word_list[i], pos_list[i]) for i in range(len(word_list))]
@@ -102,7 +103,7 @@ class M2TNMTGeneratedDataset(Dataset):
             m_tokens_list.append(m_tokens[0].cpu().numpy())
             m_length_list.append(m_length[0].item())
             t_tokens_list.append(t_tokens)
-            print(f'!!! {motion_name}, {type(motion_name)}')
+            name_list.append(motion_name)
 
         self.generated_texts_list = generated_texts_list
         self.t_tokens_list = t_tokens_list
