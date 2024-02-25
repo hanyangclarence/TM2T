@@ -90,7 +90,7 @@ class M2TNMTGeneratedDataset(Dataset):
             #     all_captions = all_captions * 3
             # print(pred_sent)
             # print(all_captions)
-            print(f'{all_captions[0]}\n{pred_sent}')
+            print(f'gt: {all_captions[0]}\npred: {pred_sent}')
 
             word_list, pos_list = self._process_text(pred_sent.strip())
             t_tokens = ['%s/%s' % (word_list[i], pos_list[i]) for i in range(len(word_list))]
@@ -121,10 +121,10 @@ class M2TNMTGeneratedDataset(Dataset):
         pos_list = []
         for token in doc:
             word = token.text
-            # if not word.isalpha():
-            #     continue
+            if not word.isalpha():
+                continue
             if (token.pos_ == 'NOUN' or token.pos_ == 'VERB') and (word != 'left'):
-                word_list.append(word)
+                word_list.append(token.lemma_)
             else:
                 word_list.append(word)
             pos_list.append(token.pos_)
