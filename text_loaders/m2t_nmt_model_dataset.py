@@ -121,10 +121,10 @@ class M2TNMTGeneratedDataset(Dataset):
         pos_list = []
         for token in doc:
             word = token.text
-            if not word.isalpha():
-                continue
+            # if not word.isalpha():
+            #     continue
             if (token.pos_ == 'NOUN' or token.pos_ == 'VERB') and (word != 'left'):
-                word_list.append(token.lemma_)
+                word_list.append(word)
             else:
                 word_list.append(word)
             pos_list.append(token.pos_)
