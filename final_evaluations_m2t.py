@@ -11,6 +11,7 @@ from utils.utils import *
 from bert_score import score
 from nlgeval import NLGEval
 from os.path import join as pjoin
+import json
 
 import logging
 import transformers
@@ -90,6 +91,7 @@ def evaluate_bleu_rouge_cider(text_loaders, file):
 
         ref_list = [list(refs) for refs in zip(*text_loader.dataset.all_caption_list)]
         cand_list = text_loader.dataset.generated_texts_list
+        name_list = text_loader.dataset.name_list
         scores = nlg_eval.compute_metrics(ref_list, cand_list)
         bleu_score_dict[text_loader_name] = np.array([scores['Bleu_1'],scores['Bleu_2'],scores['Bleu_3'],scores['Bleu_4']])
         rouge_score_dict[text_loader_name] = scores['ROUGE_L']
@@ -105,6 +107,14 @@ def evaluate_bleu_rouge_cider(text_loaders, file):
         print(f'---> [{text_loader_name}] ROUGE_L: {scores["ROUGE_L"]:.4f}', file=file, flush=True)
         print(f'---> [{text_loader_name}] CIDER: {scores["CIDEr"]:.4f}')
         print(f'---> [{text_loader_name}] CIDER: {scores["CIDEr"]:.4f}', file=file, flush=True)
+
+        result_dict = {}
+        for i in range(len(name_list)):
+            result_dict[name_list[i]] = cand_list[i]
+        with open('tm2t_prediction.json', 'w') as f:
+            json.dump(result_dict, f, indent=4)
+
+
     return bleu_score_dict, rouge_score_dict, cider_score_dict
 
 

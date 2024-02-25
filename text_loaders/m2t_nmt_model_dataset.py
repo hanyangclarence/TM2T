@@ -102,7 +102,7 @@ class M2TNMTGeneratedDataset(Dataset):
             m_tokens_list.append(m_tokens[0].cpu().numpy())
             m_length_list.append(m_length[0].item())
             t_tokens_list.append(t_tokens)
-            print(f'!!! {name_list}, {type(name_list)}')
+            print(f'!!! {motion_name}, {type(motion_name)}')
 
         self.generated_texts_list = generated_texts_list
         self.t_tokens_list = t_tokens_list
@@ -112,6 +112,7 @@ class M2TNMTGeneratedDataset(Dataset):
         self.m_length_list = m_length_list
         self.opt = opt
         self.w_vectorizer = w_vectorizer
+        self.name_list = name_list
 
         print(f'!!! Total: {len(self.generated_texts_list)}')
 
